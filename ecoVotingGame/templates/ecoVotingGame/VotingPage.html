@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Page title
+<style>
+    html{
+        visibility: hidden;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'otree/css/theme.css' %}">
+<link rel="stylesheet" href="{% static 'chart.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
+<script src="{% static 'init.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% formfields %}
+    {% next_button %}
+<div id="chart_area">
+    <div id="leftChart_area">
+        <canvas id="leftChart" ></canvas>
+    </div>
+    <div id="rightChart_area">
+        <canvas id="rightChart" ></canvas>
+    </div>
+</div>
+<script>
+    origin_division = "{{ origin_division }}".split(", ")
+    test = "{{ origin_division }}".split(",")
+    alternative_division = "{{ alternative_division }}".split(", ")
+    rank = {{ rank }}
+</script>
+<script src="{% static 'chart.js' %}"></script>
+{% endblock %}

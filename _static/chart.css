@@ -1,0 +1,14 @@
+#chart_area{
+    width: 100%;
+    display: inline-block;
+}
+#leftChart_area{
+    width: 48%;
+    margin: 0.5em;
+    display: inline-block;
+}
+#rightChart_area{
+    width: 48%;
+    margin: 0.5em;
+    display: inline-block;
+}

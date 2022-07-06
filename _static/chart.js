@@ -2,12 +2,15 @@ const leftctx = document.getElementById('leftChart').getContext('2d');
 const rightctx = document.getElementById('rightChart').getContext('2d');
 
 function setChart(ctx, rank, divisions, title_text) {
-    label_array = divisions.map((x)=>x)
-    label_array[rank - 1] = label_array[rank - 1].concat(" (you)")
+    Chart.register(ChartDataLabels);
+    indexLength = divisions.length
+    correct_index = indexLength - rank
+    label_array = divisions.map((x) => x)
+    label_array[correct_index] = label_array[correct_index].concat(" (you)")
     backgroundColor_array = Array(5).fill('rgba(54, 162, 235, 0.2)')
-    backgroundColor_array[rank - 1] = 'rgba(255, 99, 132, 0.2)'
+    backgroundColor_array[correct_index] = 'rgba(255, 99, 132, 0.2)'
     borderColor_array = Array(5).fill('rgba(54, 162, 235, 1)')
-    borderColor_array[rank - 1] = 'rgba(255, 99, 132, 1)'
+    borderColor_array[correct_index] = 'rgba(255, 99, 132, 1)'
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -32,6 +35,21 @@ function setChart(ctx, rank, divisions, title_text) {
                     y: {
                         beginAtZero: true
                     }
+                },
+                datalabels: {
+                    backgroundColor: function (context) {
+                        return context.dataset.backgroundColor;
+                    },
+                    borderColor: function (context) {
+                        return context.dataset.borderColor;
+                    },
+                    borderRadius: 25,
+                    borderWidth: 2,
+                    // color: 'white',
+                    font: {
+                        weight: 'bold'
+                    },
+                    padding: 4,
                 }
             }
         }

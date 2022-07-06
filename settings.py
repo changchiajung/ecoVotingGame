@@ -6,7 +6,7 @@ SESSION_CONFIGS = [
        display_name="Economic Voting Game",
        num_demo_participants=5,
        # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
-        app_sequence = ['ecoVotingGame', 'payment_info']
+        app_sequence = ['gameintroduction','ecoVotingGame', 'payment_info']
 ),
 ]
 

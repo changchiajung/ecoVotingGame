@@ -32,4 +32,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    score = models.IntegerField()
+

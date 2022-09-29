@@ -2,14 +2,43 @@
 {% load otree static %}
 
 {% block title %}
-    General Test
+General Test
 {% endblock %}
-
 {% block content %}
-    Including Some General Test.
-    For Debug, please enter the score into below input field.
-    {% formfields %}
-    {% next_button %}
+<style>
+    #imageSpace{
+        width: 100%;
+        height: 40vh;
+    }
+    img{
+        max-width: 65vw;
+        max-height: 40vh;
+        margin: auto;
+    }
+    #inputbox{
+        /*position: absolute;*/
+        /*left: 0;*/
+        /*top: 50vh;*/
+    }
+    #sendButton{
+        /*position: absolute;*/
+        /*left: 20vw;*/
+        /*top: 50vh;*/
+    }
+</style>
+<!--Including Some General Test.-->
+<br>
+<div id="imageSpace">
+    <img src="{{ image_link }}" alt="Image" id="question_image">
+</div>
+
+<input id="inputbox" type="text">
+<button id="sendButton" class="otree-btn-next btn btn-primary" type="button" onclick="sendValue()">Send</button>
+
+<!--For Debug, please enter the score into below input field.-->
+<!--{% formfields %}-->
+<!--{% next_button %}-->
+<script src="{% static 'generalTest.js' %}"></script>
 {% endblock %}
 
 

@@ -9,7 +9,6 @@ class VotingPage(Page):
     form_fields = ['choose']
 
     def vars_for_template(self):
-        ## FOR DEVELOP, set rank of player as id in round
         # rank = self.player.id_in_group
         rank = self.player.participant.vars["rank"]
         score = self.player.participant.vars["score"]
@@ -28,6 +27,15 @@ def process_voting(self):
     self.group.voting_origin = voting_origin
     self.group.voting_alternative = voting_alternative
     self.group.major_result = True if voting_origin > voting_alternative else False
+    if self.group.round_number == Constants.num_rounds:
+        results = []
+        for g in self.group.in_all_rounds():
+            if g.major_result:
+                results.append(g.origin_division)
+            else:
+                results.append(g.alternative_division)
+        random_division = random.choice(results)
+        self.subsession.final_division = random_division
 
 
 class VotingWaitingPage(WaitPage):
@@ -35,7 +43,11 @@ class VotingWaitingPage(WaitPage):
 
 
 class ResultPage(Page):
-    pass
+    def vars_for_template(self):
+        division = self.group.origin_division if self.group.major_result else self.group.alternative_division
+        rank = self.player.participant.vars["rank"]
+        return dict(voting_origin=self.group.voting_origin, voting_alternative=self.group.voting_alternative,
+                    major_result=self.group.major_result, division=division, rank=rank)
 
 
 class ResultWaitPage(WaitPage):
@@ -63,4 +75,21 @@ class IntroductionWaitPage(WaitPage):
     after_all_players_arrive = set_shuffle_options
 
 
-page_sequence = [IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage, ResultWaitPage]
+class FinalResultPage(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+    def vars_for_template(self):
+        '''
+        Need
+            Optimization
+                        Here
+        '''
+        division = self.subsession.final_division
+        rank = self.player.participant.vars["rank"]
+        d_list = division.split(", ")
+        payment = int(d_list[len(d_list) - rank])
+        self.participant.payoff = payment
+        return dict(division=division, rank=rank, payment=payment)
+
+
+page_sequence = [IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage, ResultWaitPage, FinalResultPage]

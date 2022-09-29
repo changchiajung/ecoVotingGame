@@ -25,7 +25,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    final_division = models.StringField()
 
 
 class Group(BaseGroup):

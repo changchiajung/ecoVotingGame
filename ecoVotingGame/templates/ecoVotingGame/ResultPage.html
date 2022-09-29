@@ -2,12 +2,37 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+    Round Result
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'otree/css/theme.css' %}">
+<link rel="stylesheet" href="{% static 'chart.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc"></script>
+    <p>
+        Voting Result (origin vs alternative)
+    </p>
+    <p>
+        {{ voting_origin }} : {{ voting_alternative }}
+    </p>
+<div id="chart_area">
+    <div id="result_area">
+        <canvas id="result" ></canvas>
+    </div>
+</div>
 
     {% next_button %}
+<script>
+    $(document).ready(function () {
+        $(".debug-info").remove();
+    })
+</script>
+<script>
+    division = "{{ division }}".split(", ")
+    rank = {{ rank }}
+</script>
+<script src="{% static 'result.js' %}"></script>
 {% endblock %}
 
 

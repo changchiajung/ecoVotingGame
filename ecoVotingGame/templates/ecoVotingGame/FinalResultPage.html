@@ -1,0 +1,37 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Your Payment Division Result
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'otree/css/theme.css' %}">
+<link rel="stylesheet" href="{% static 'chart.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc"></script>
+    <p>
+        Below is the final division.
+        <br>
+        Your final payment is {{payment}}
+    </p>
+<div id="chart_area">
+    <div id="result_area">
+        <canvas id="result" ></canvas>
+    </div>
+</div>
+
+    {% next_button %}
+<script>
+    $(document).ready(function () {
+        $(".debug-info").remove();
+    })
+</script>
+<script>
+    division = "{{ division }}".split(", ")
+    rank = {{ rank }}
+</script>
+<script src="{% static 'result.js' %}"></script>
+{% endblock %}
+
+

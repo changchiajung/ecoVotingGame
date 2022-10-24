@@ -25,7 +25,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    final_division = models.StringField()
+    pass
 
 
 class Group(BaseGroup):
@@ -34,6 +34,7 @@ class Group(BaseGroup):
     voting_origin = models.IntegerField()
     voting_alternative = models.IntegerField()
     major_result = models.BooleanField() # True: origin is majority ; False: alternative is majority
+    final_division = models.StringField()
 
 
 class Player(BasePlayer):

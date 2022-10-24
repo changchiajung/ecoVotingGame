@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    測驗結果
+{% endblock %}
+
+{% block content %}
+    <p>您的得分為 {{ score }}</p>
+    <p>您的排名為 {{ rank }}</p>
+    {% next_button %}
+{% endblock %}
+
+

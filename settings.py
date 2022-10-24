@@ -2,12 +2,20 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-       name='economic_voting_game',
-       display_name="Economic Voting Game",
-       num_demo_participants=5,
-       # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
-        app_sequence = ['gameintroduction','ecoVotingGame', 'payment_info']
-),
+        name='economic_voting_game',
+        display_name="Economic Voting Game",
+        num_demo_participants=5,
+        # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
+        app_sequence=['gameintroduction', 'ecoVotingGame', 'payment_info']
+    ),
+    dict(
+        name='economic_voting_game_test',
+        display_name="Economic Voting Game (Testing)",
+        num_demo_participants=5,
+        # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
+        app_sequence=['gameintroduction', 'ecoVotingGame', 'payment_info'],
+        use_browser_bots=True
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -37,3 +45,7 @@ SECRET_KEY = '4*pr2dnu)m8w71q9+pphxxl#3quad2sh-gg^r+r*%w3z(d1nic'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']
+
+
+def creating_session(subsession):
+    print(subsession.id)

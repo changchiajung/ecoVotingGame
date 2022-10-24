@@ -17,6 +17,7 @@ class VotingPage(Page):
 
 
 def process_voting(self):
+    # NEED MODIFICATION for group divide
     voting_origin = 0
     voting_alternative = 0
     for p in self.group.get_players():
@@ -35,7 +36,7 @@ def process_voting(self):
             else:
                 results.append(g.alternative_division)
         random_division = random.choice(results)
-        self.subsession.final_division = random_division
+        self.group.final_division = random_division
 
 
 class VotingWaitingPage(WaitPage):
@@ -43,6 +44,7 @@ class VotingWaitingPage(WaitPage):
 
 
 class ResultPage(Page):
+    # NEED MODIFICATION for group divide
     def vars_for_template(self):
         division = self.group.origin_division if self.group.major_result else self.group.alternative_division
         rank = self.player.participant.vars["rank"]
@@ -51,8 +53,15 @@ class ResultPage(Page):
 
 
 class ResultWaitPage(WaitPage):
-    pass
+    def is_displayed(self):
+        return self.round_number != Constants.num_rounds
 
+
+
+class FinalResultWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+    wait_for_all_groups = True
 
 def set_shuffle_options(self):
     # Read all options from preset file
@@ -84,7 +93,7 @@ class FinalResultPage(Page):
             Optimization
                         Here
         '''
-        division = self.subsession.final_division
+        division = self.group.final_division
         rank = self.player.participant.vars["rank"]
         d_list = division.split(", ")
         payment = int(d_list[len(d_list) - rank])
@@ -92,4 +101,4 @@ class FinalResultPage(Page):
         return dict(division=division, rank=rank, payment=payment)
 
 
-page_sequence = [IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage, ResultWaitPage, FinalResultPage]
+page_sequence = [IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage, ResultWaitPage, FinalResultWaitPage, FinalResultPage]

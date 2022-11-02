@@ -4,11 +4,13 @@
 }
 #leftChart_area{
     width: 48%;
+    height: 60vh;
     margin: 0.5em;
     display: inline-block;
 }
 #rightChart_area{
     width: 48%;
+    height: 60vh;
     margin: 0.5em;
     display: inline-block;
 }

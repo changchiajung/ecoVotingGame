@@ -4,9 +4,13 @@ const rightctx = document.getElementById('rightChart').getContext('2d');
 function setChart(ctx, rank, divisions, title_text) {
     Chart.register(ChartDataLabels);
     indexLength = divisions.length
-    correct_index = indexLength - rank
-    label_array = divisions.map((x) => x)
-    label_array[correct_index] = label_array[correct_index].concat(" (you)")
+    origin_value = divisions[indexLength - rank]
+    // Sorting division, and find correct_index
+    divisions.sort()
+    correct_index = divisions.findIndex((num) => num == origin_value)
+    // label_array = divisions.map((x) => x)
+    label_array = [1,2,3,4,5]
+    // label_array[correct_index] = label_array[correct_index].concat(" (you)")
     backgroundColor_array = Array(5).fill('rgba(54, 162, 235, 0.2)')
     backgroundColor_array[correct_index] = 'rgba(255, 99, 132, 0.2)'
     borderColor_array = Array(5).fill('rgba(54, 162, 235, 1)')
@@ -23,6 +27,13 @@ function setChart(ctx, rank, divisions, title_text) {
             }]
         },
         options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                }
+            },
             plugins: {
                 legend: {
                     display: false
@@ -31,11 +42,6 @@ function setChart(ctx, rank, divisions, title_text) {
                     display: true,
                     text: title_text
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
                 datalabels: {
                     backgroundColor: function (context) {
                         return context.dataset.backgroundColor;
@@ -43,13 +49,15 @@ function setChart(ctx, rank, divisions, title_text) {
                     borderColor: function (context) {
                         return context.dataset.borderColor;
                     },
-                    borderRadius: 25,
+                    borderRadius: 15,
                     borderWidth: 2,
                     // color: 'white',
                     font: {
                         weight: 'bold'
                     },
-                    padding: 4,
+                    padding: 6,
+                    anchor: "end",
+                    align: 'top',
                 }
             }
         }

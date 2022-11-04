@@ -8,7 +8,7 @@ function setChart(ctx, rank, divisions, title_text) {
     divisions.sort()
     correct_index = divisions.findIndex((num) => num == origin_value)
     // label_array = divisions.map((x) => x)
-    label_array = [1,2,3,4,5]
+    label_array = [1, 2, 3, 4, 5]
     // label_array[correct_index] = label_array[correct_index].concat(" (you)")
     backgroundColor_array = Array(5).fill('rgba(54, 162, 235, 0.2)')
     backgroundColor_array[correct_index] = 'rgba(255, 99, 132, 0.2)'
@@ -31,6 +31,22 @@ function setChart(ctx, rank, divisions, title_text) {
                 y: {
                     beginAtZero: true,
                     max: 100,
+                    title: {
+                        display: true,
+                        text: "報酬",
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                x: {
+                    title:{
+                        display: true,
+                        text: "排名",
+                        font: {
+                            size: 14
+                        }
+                    }
                 }
             },
             plugins: {
@@ -39,7 +55,10 @@ function setChart(ctx, rank, divisions, title_text) {
                 },
                 title: {
                     display: true,
-                    text: title_text
+                    text: title_text,
+                    font: {
+                        size: 14
+                    }
                 },
                 datalabels: {
                     backgroundColor: function (context) {

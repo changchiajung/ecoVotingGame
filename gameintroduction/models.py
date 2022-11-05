@@ -63,6 +63,7 @@ class Player(BasePlayer):
         print('received a answer from', self.id_in_group, ':', bid)
         current_question = Question.objects.filter(subsession=self.subsession, sequence=self.question_index,
                                                    group_number=self.group_number)[0]
+        Answer.objects.create(player=self, question=current_question, answer=bid)
         if current_question.correct_answer == bid:
             print("Correct Answer")
             self.score += 1
@@ -84,3 +85,29 @@ class Player(BasePlayer):
                 self.question_index = self.subsession.total_question + 1
                 return {self.id_in_group: {"image_link": "NULL", "options": "", "progress": 100, "score": self.score,
                                            "total_score": self.subsession.total_question + 1}}
+
+
+class Answer(ExtraModel):
+    player = models.Link(Player)
+    question = models.Link(Question)
+    answer = models.StringField()
+
+
+def custom_export(players):
+    attr_list = ["Session Code", "Sequence", "Question Image"]
+    attr_list += ["player_{}".format(index) for index in range(1, 6)]
+    yield attr_list
+    result = [""] * 31
+    all_question = Question.objects.all()
+    for q in all_question:
+        answers = Answer.objects.filter(question=q)
+        answer_list = [""] * 5
+        for answer in answers:
+            answer_list[answer.player.id_in_group - 1] = answer.answer
+        yield [q.subsession.session.code, q.sequence, q.image_link] + answer_list
+        if q.sequence == 30:
+            score_data = [q.subsession.session.code, 31, "受試者得分", "", "", "", "", ""]
+            for player in Player.objects.filter(subsession=q.subsession):
+                score_data[player.id_in_group+2] = player.score
+            yield score_data
+

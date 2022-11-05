@@ -10,6 +10,7 @@ class Introduction(Page):
 
 
 class GeneralTest(Page):
+    timeout_seconds = 600
     live_method = 'live_bid'
 
     def vars_for_template(self):

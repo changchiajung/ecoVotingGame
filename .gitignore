@@ -4,3 +4,4 @@
 __temp_migrations/
 questions.numbers
 db.sqlite3
+db.sqlite3

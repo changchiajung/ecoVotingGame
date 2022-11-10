@@ -107,7 +107,7 @@ def custom_export(players):
         yield [q.subsession.session.code, q.sequence, q.image_link] + answer_list
         if q.sequence == 30:
             score_data = [q.subsession.session.code, 31, "受試者得分", "", "", "", "", ""]
-            for player in Player.objects.filter(subsession=q.subsession):
+            for player in Player.objects.filter(subsession=q.subsession, group_number=q.group_number):
                 score_data[player.id_in_group+2] = player.score
             yield score_data
 

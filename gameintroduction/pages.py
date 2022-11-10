@@ -57,16 +57,15 @@ def parse_question_from_file(self):
     self.subsession.total_question = len(question_list)
     # print(len(question_list))
     # Have to repeat self.subsession.total_group times, for each subGroup
-    for i in range(self.subsession.total_group):
-        random.shuffle(question_list)
-        for index, question in enumerate(question_list):
-            Question.objects.create(subsession=self.subsession,
-                                    sequence=index + 1,  # start from 1
-                                    image_link=question[0],
-                                    correct_answer=question[1],
-                                    options=question[2],
-                                    group_number=i + 1
-                                    )
+    random.shuffle(question_list)
+    for index, question in enumerate(question_list):
+        Question.objects.create(subsession=self.subsession,
+                                sequence=index + 1,  # start from 1
+                                image_link=question[0],
+                                correct_answer=question[1],
+                                options=question[2],
+                                group_number=self.group.id_in_subsession
+                                )
 
 
 class IntroductionWaitPage(WaitPage):

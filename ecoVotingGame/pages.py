@@ -64,6 +64,7 @@ class FinalResultWaitPage(WaitPage):
     wait_for_all_groups = True
 
 def set_shuffle_options(self):
+    # Shuffle for group division
     # Read all options from preset file
     f = open(Constants.file_name, "r")
     lines = f.readlines()
@@ -84,6 +85,12 @@ class IntroductionWaitPage(WaitPage):
     after_all_players_arrive = set_shuffle_options
 
 
+class RegroupWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number == 1
+    wait_for_all_groups = True
+    after_all_players_arrive = 'regroup_method'
+
 class FinalResultPage(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -101,4 +108,4 @@ class FinalResultPage(Page):
         return dict(division=division, rank=rank, payment=payment)
 
 
-page_sequence = [IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage, ResultWaitPage, FinalResultWaitPage, FinalResultPage]
+page_sequence = [RegroupWaitPage, IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage, ResultWaitPage, FinalResultWaitPage, FinalResultPage]

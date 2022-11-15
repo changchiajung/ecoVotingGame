@@ -15,8 +15,8 @@ class GeneralTest(Page):
 
     def vars_for_template(self):
         question = Question.objects.filter(subsession=self.subsession,
-                                           sequence=self.player.question_index,
-                                           group_number=self.player.group_number)
+                                           sequence=self.player.question_index)
+                                           # group_number=self.player.group_number)
         if question.count() > 0:
             image_link = Constants.image_base_link + question[0].image_link
             # print(image_link)
@@ -30,6 +30,7 @@ class GeneralTest(Page):
 
 
 def process_rank(self):
+    '''
     # NEED MODIFICATION for group divide
     # Have to compute rank in each subGroup separately
     all_group_information = {}
@@ -46,6 +47,17 @@ def process_rank(self):
             current_player.participant.vars["rank"] = current_rank
             print("Group : {} id: {} , rank: {} ".format(group_number, current_player.id_in_group, current_rank))
             current_rank += 1
+    '''
+    current_rank = 1
+    all_player_information = {}
+    for p in self.group.get_players():
+        all_player_information[p.id_in_group] = p.score
+    for k, v in reversed(sorted(all_player_information.items(), key=lambda item: item[1])):
+        current_player = self.group.get_player_by_id(k)
+        current_player.participant.vars["score"] = current_player.score
+        current_player.participant.vars["rank"] = current_rank
+        print("id: {} , rank: {} ".format(current_player.id_in_group, current_rank))
+        current_rank += 1
 
 
 def parse_question_from_file(self):
@@ -64,7 +76,7 @@ def parse_question_from_file(self):
                                 image_link=question[0],
                                 correct_answer=question[1],
                                 options=question[2],
-                                group_number=self.group.id_in_subsession
+                                # group_number=self.group.id_in_subsession
                                 )
 
 

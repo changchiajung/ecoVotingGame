@@ -25,7 +25,17 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+
+    def regroup_method(self):
+        group_count = len(self.get_groups())
+        new_dist = [[] for i in range(group_count)]
+        for p in self.get_players():
+            new_dist[(p.participant.vars["rank"] - 1) % group_count].append(p.id_in_subsession)
+            p.participant.vars["rank"] = (p.participant.vars["rank"]-1)//group_count + 1
+        print(new_dist)
+        self.set_group_matrix(new_dist)
+        for subsession in self.in_rounds(2, Constants.num_rounds):
+            subsession.group_like_round(1)
 
 
 class Group(BaseGroup):

@@ -5,6 +5,7 @@ import random
 
 
 class VotingPage(Page):
+    timeout_seconds = 60
     form_model = 'player'
     form_fields = ['choose']
 
@@ -21,9 +22,9 @@ def process_voting(self):
     voting_origin = 0
     voting_alternative = 0
     for p in self.group.get_players():
-        if p.choose == "origin":
+        if p.choose == "左邊":
             voting_origin += 1
-        elif p.choose == "alternative":
+        elif p.choose == "右邊":
             voting_alternative += 1
     self.group.voting_origin = voting_origin
     self.group.voting_alternative = voting_alternative
@@ -57,11 +58,12 @@ class ResultWaitPage(WaitPage):
         return self.round_number != Constants.num_rounds
 
 
-
 class FinalResultWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
+
     wait_for_all_groups = True
+
 
 def set_shuffle_options(self):
     # Shuffle for group division
@@ -88,12 +90,27 @@ class IntroductionWaitPage(WaitPage):
 class RegroupWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == 1
+
     wait_for_all_groups = True
     after_all_players_arrive = 'regroup_method'
+
+class RegroupResultPage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+    def vars_for_template(self):
+        rank = self.player.participant.vars["rank"]
+        score_in_group = []
+        for p in self.group.get_players():
+            score_in_group.append(p.participant.vars["score"])
+        score_in_group = ", ".join([str(ele) for ele in sorted(score_in_group)])
+
+        return dict(division=score_in_group, rank=rank, score=self.player.participant.vars["score"])
+
 
 class FinalResultPage(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
+
     def vars_for_template(self):
         '''
         Need
@@ -108,4 +125,5 @@ class FinalResultPage(Page):
         return dict(division=division, rank=rank, payment=payment)
 
 
-page_sequence = [RegroupWaitPage, IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage, ResultWaitPage, FinalResultWaitPage, FinalResultPage]
+page_sequence = [RegroupWaitPage, RegroupResultPage, IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage,
+                 ResultWaitPage, FinalResultWaitPage, FinalResultPage]

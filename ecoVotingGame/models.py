@@ -48,4 +48,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    choose = models.StringField(widget=widgets.RadioSelect, choices=['origin','alternative'], label="選擇")
+    choose = models.StringField(widget=widgets.RadioSelect, choices=['左邊','右邊'], label="選擇")

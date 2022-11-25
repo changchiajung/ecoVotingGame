@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    投票結果
+    分組結果
 {% endblock %}
 
 {% block content %}
@@ -11,11 +11,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc"></script>
     <p>
-        投票結果 (左 vs 右)
+        根據綜合知識測驗結果，您的得分及組內排名為
     </p>
-    <p>
-        {{ voting_origin }} : {{ voting_alternative }}
-    </p>
+    <p>您的得分為 {{ score }}</p>
+    <p>您的組內排名為 {{ rank }}</p>
 <div id="chart_area">
     <div id="result_area">
         <canvas id="result" ></canvas>
@@ -31,8 +30,9 @@
 <script>
     division = "{{ division }}".split(", ")
     rank = {{ rank }}
+    max_answer = parseInt(division[4]) + 1
 </script>
-<script src="{% static 'result.js' %}"></script>
+<script src="{% static 'regroupResult.js' %}"></script>
 {% endblock %}
 
 

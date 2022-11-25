@@ -13,10 +13,22 @@
     height: 60vh;
     margin: 0.5em;
     display: inline-block;
+    margin: 0 0.5%;
 }
 #rightChart_area{
     width: 48%;
     height: 60vh;
     margin: 0.5em;
+    display: inline-block;
+    margin: 0 0.5%;
+}
+#introduction_trigger{
+	height: 16px;
+    width: 16px;
+    background-image: url("question.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    cursor: pointer;
     display: inline-block;
 }

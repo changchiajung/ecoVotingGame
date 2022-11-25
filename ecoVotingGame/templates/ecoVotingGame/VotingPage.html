@@ -2,7 +2,8 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+    報酬分佈投票
+
 {% endblock %}
 
 {% block content %}
@@ -16,9 +17,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc"></script>
 <script src="{% static 'init.js' %}"></script>
-Your score: {{ score }}, your rank in group: {{ rank }}
+您的得分: {{ score }}, 您在組別中的排名: {{ rank }} <div id="introduction_trigger"></div>
+
     {% formfields %}
-    {% next_button %}
+<button class="otree-btn-next btn btn-primary" id="next_button">下一步</button>
 <div id="chart_area">
     <div id="leftChart_area">
         <canvas id="leftChart" ></canvas>
@@ -27,6 +29,24 @@ Your score: {{ score }}, your rank in group: {{ rank }}
         <canvas id="rightChart" ></canvas>
     </div>
 </div>
+<div id="score_information" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="score_title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="score_description">Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
     origin_division = "{{ origin_division }}".split(", ")
     test = "{{ origin_division }}".split(",")
@@ -34,6 +54,7 @@ Your score: {{ score }}, your rank in group: {{ rank }}
     rank = {{ rank }}
 </script>
 <script src="{% static 'chart.js' %}"></script>
+<script src="{% static 'votingIntroduction.js' %}"></script>
 <script>
     $(".debug-info").remove();
 </script>

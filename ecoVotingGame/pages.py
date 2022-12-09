@@ -8,13 +8,14 @@ class VotingPage(Page):
     timeout_seconds = 60
     form_model = 'player'
     form_fields = ['choose']
+    timer_text = '剩餘時間: '
 
     def vars_for_template(self):
         # rank = self.player.id_in_group
         rank = self.player.participant.vars["rank"]
         score = self.player.participant.vars["score"]
         return dict(origin_division=self.group.origin_division, alternative_division=self.group.alternative_division,
-                    rank=rank, score=score)
+                    rank=rank, score=score, round_number=self.subsession.round_number)
 
 
 def process_voting(self):
@@ -30,12 +31,18 @@ def process_voting(self):
     self.group.voting_alternative = voting_alternative
     self.group.major_result = True if voting_origin > voting_alternative else False
     if self.group.round_number == Constants.num_rounds:
+        result_dict = {}
+        for i in range(Constants.players_per_group + 1):
+            result_dict[i] = []
         results = []
         for g in self.group.in_all_rounds():
-            if g.major_result:
-                results.append(g.origin_division)
-            else:
-                results.append(g.alternative_division)
+            result_dict[g.voting_origin].append(g.origin_division)
+            result_dict[g.voting_alternative].append(g.alternative_division)
+        for i in range(Constants.players_per_group, -1, -1):
+            if len(result_dict[i]) > 0:
+                results = result_dict[i]
+                break
+        print("{} : {}".format(self.group.id_in_subsession, results))
         random_division = random.choice(results)
         self.group.final_division = random_division
 
@@ -45,6 +52,7 @@ class VotingWaitingPage(WaitPage):
 
 
 class ResultPage(Page):
+    # timeout_seconds = 30
     # NEED MODIFICATION for group divide
     def vars_for_template(self):
         division = self.group.origin_division if self.group.major_result else self.group.alternative_division
@@ -94,9 +102,12 @@ class RegroupWaitPage(WaitPage):
     wait_for_all_groups = True
     after_all_players_arrive = 'regroup_method'
 
+
 class RegroupResultPage(Page):
+    # timeout_seconds = 30
     def is_displayed(self):
         return self.round_number == 1
+
     def vars_for_template(self):
         rank = self.player.participant.vars["rank"]
         score_in_group = []
@@ -121,8 +132,8 @@ class FinalResultPage(Page):
         rank = self.player.participant.vars["rank"]
         d_list = division.split(", ")
         payment = int(d_list[len(d_list) - rank])
-        self.participant.payoff = payment
-        return dict(division=division, rank=rank, payment=payment)
+        self.participant.payoff = payment * 10
+        return dict(division=division, rank=rank, payment=payment, finalPayment=self.participant.payoff)
 
 
 page_sequence = [RegroupWaitPage, RegroupResultPage, IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage,

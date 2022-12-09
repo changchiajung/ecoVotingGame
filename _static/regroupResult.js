@@ -32,6 +32,9 @@ function setChart(ctx, rank, divisions, title_text) {
                         text: "報酬",
                         font: {
                             size: 14
+                        },
+                        ticks: {
+                            stepSize: 1
                         }
                     }
                 },

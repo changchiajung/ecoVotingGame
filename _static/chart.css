@@ -31,4 +31,16 @@
     background-position: center;
     cursor: pointer;
     display: inline-block;
+    margin: 0 5px;
+}
+
+#id_choose_0_label{
+    position: absolute;
+    left: 32%;
+    margin: 1vh 1vw;
+}
+#id_choose_1_label{
+    position: absolute;
+    right: 32%;
+    margin: 1vh 1vw;
 }

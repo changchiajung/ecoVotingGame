@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    報酬分佈投票
+    報酬分佈投票 ({{round_number}}/24)
 
 {% endblock %}
 
@@ -17,9 +17,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc"></script>
 <script src="{% static 'init.js' %}"></script>
-您的得分: {{ score }}, 您在組別中的排名: {{ rank }} <div id="introduction_trigger"></div>
-
-    {% formfields %}
+您的得分: {{ score }}, 您在組別中的排名: {{ rank }}
+<br>
+您的選擇<div id="introduction_trigger"></div>
+<br>
+<label id="id_choose_0_label" for="id_choose_0"><input type="radio" name="choose" value="左邊" required="" id="id_choose_0" class="form-check-input">
+ 左邊</label>
+<label id="id_choose_1_label" for="id_choose_1"><input type="radio" name="choose" value="右邊" required="" id="id_choose_1" class="form-check-input">
+ 右邊</label>
+<br>
+<br>
 <button class="otree-btn-next btn btn-primary" id="next_button">下一步</button>
 <div id="chart_area">
     <div id="leftChart_area">

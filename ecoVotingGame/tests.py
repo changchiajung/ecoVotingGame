@@ -8,7 +8,11 @@ from time import sleep
 
 class PlayerBot(Bot):
     def play_round(self):
-        random_choice = ['origin','alternative']
+        if self.round_number == 1:
+            yield pages.RegroupResultPage
+        random_choice = ['左邊','右邊']
         yield pages.VotingPage, dict(choose=random.choice(random_choice))
         yield pages.ResultPage
+        if self.round_number == 30:
+            yield pages.FinalResultPage
 

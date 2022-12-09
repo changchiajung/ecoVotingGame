@@ -6,14 +6,14 @@ SESSION_CONFIGS = [
         display_name="Economic Voting Game",
         num_demo_participants=5,
         # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
-        app_sequence=['gameintroduction', 'ecoVotingGame', 'payment_info']
+        app_sequence=['gameintroduction', 'ecoVotingGame']
     ),
     dict(
         name='economic_voting_game_test',
         display_name="Economic Voting Game (Testing)",
         num_demo_participants=5,
         # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
-        app_sequence=['gameintroduction', 'ecoVotingGame', 'payment_info'],
+        app_sequence=['gameintroduction', 'ecoVotingGame'],
         use_browser_bots=True
     ),
 ]

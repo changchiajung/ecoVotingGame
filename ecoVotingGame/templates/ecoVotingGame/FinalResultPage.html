@@ -11,16 +11,13 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc"></script>
     <p>
-        經過前幾輪的投票，電腦統計得票數之後，最後是由以下這個分配方式，獲得你們組裡最高票：
+       謝謝您參加我們的實驗。我們根據之前每一回合的投票結果，結算您帳戶最後累計的報酬，總共為{{finalPayment}}元台幣，作為您今天的報酬。
     </p>
 <div id="chart_area">
     <div id="result_area">
         <canvas id="result" ></canvas>
     </div>
 </div>
-<p>
-    依照這個分配方式，您今天在實驗裡獲得{{payment}}點，總共{{finalPayment}}元的報酬（1點換成10元）。
-</p>
 
     {% next_button %}
 <script>

@@ -31,7 +31,7 @@ function setChart(ctx, rank, divisions, title_text) {
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 100,
+                    max: 400,
                     title: {
                         display: true,
                         text: "報酬",

@@ -38,11 +38,12 @@ def process_voting(self):
         for g in self.group.in_all_rounds():
             result_dict[g.voting_origin].append(g.origin_division)
             result_dict[g.voting_alternative].append(g.alternative_division)
+        # print("{}: {}".format(self.group.id_in_subsession, result_dict))
         for i in range(Constants.players_per_group, -1, -1):
             if len(result_dict[i]) > 0:
                 results = result_dict[i]
                 break
-        print("{} : {}".format(self.group.id_in_subsession, results))
+        print("{}: {}".format(self.group.id_in_subsession, results))
         random_division = random.choice(results)
         self.group.final_division = random_division
 
@@ -132,7 +133,7 @@ class FinalResultPage(Page):
         rank = self.player.participant.vars["rank"]
         d_list = division.split(", ")
         payment = int(d_list[len(d_list) - rank])
-        self.participant.payoff = payment * 10
+        self.participant.payoff = payment
         return dict(division=division, rank=rank, payment=payment, finalPayment=self.participant.payoff)
 
 

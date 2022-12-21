@@ -6,7 +6,8 @@ SESSION_CONFIGS = [
         display_name="Economic Voting Game",
         num_demo_participants=5,
         # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
-        app_sequence=['gameintroduction', 'ecoVotingGame']
+        app_sequence=['gameintroduction', 'ecoVotingGame'],
+        participation_fee=150
     ),
     dict(
         name='economic_voting_game_test',
@@ -14,7 +15,8 @@ SESSION_CONFIGS = [
         num_demo_participants=5,
         # app_sequence=['gameintroduction','ecoVotingGame', 'payment_info']
         app_sequence=['gameintroduction', 'ecoVotingGame'],
-        use_browser_bots=True
+        use_browser_bots=True,
+        participation_fee=150
     ),
 ]
 

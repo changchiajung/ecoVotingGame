@@ -61,19 +61,19 @@ class Player(BasePlayer):
     # group_number = models.IntegerField()
 
     def live_bid(self, bid):
-        print('received a answer from', self.id_in_group, ':', bid)
+        # print('received a answer from', self.id_in_group, ':', bid)
         current_question = Question.objects.filter(subsession=self.subsession, sequence=self.question_index)[0]
                                                    # group_number=self.group_number)[0]
         Answer.objects.create(player=self, question=current_question, answer=bid)
         if current_question.correct_answer == bid:
-            print("Correct Answer")
+            # print("Correct Answer")
             self.score += 1
-        else:
-            print("Incorrect Answer")
+        # else:
+            # print("Incorrect Answer")
         # Get Next Question
         if self.question_index <= self.subsession.total_question:
             self.question_index += 1
-            print("index : {}".format(self.question_index))
+            # print("index : {}".format(self.question_index))
             next_question = Question.objects.filter(subsession=self.subsession, sequence=self.question_index)
                                                     # group_number=self.group_number)
             if next_question.count() > 0:

@@ -29,8 +29,16 @@ def process_voting(self):
             voting_alternative += 1
     self.group.voting_origin = voting_origin
     self.group.voting_alternative = voting_alternative
-    self.group.major_result = True if voting_origin > voting_alternative else False
+    # Set equal situation as random
+    if voting_origin > voting_alternative:
+        self.group.major_result = True
+    elif voting_alternative > voting_origin:
+        self.group.major_result = False
+    else:
+        self.group.major_result = True if self.group.round_number % 2 == 0 else False
+
     if self.group.round_number == Constants.num_rounds:
+        '''
         result_dict = {}
         for i in range(Constants.players_per_group + 1):
             result_dict[i] = []
@@ -46,7 +54,17 @@ def process_voting(self):
         print("{}: {}".format(self.group.id_in_subsession, results))
         random_division = random.choice(results)
         self.group.final_division = random_division
-
+        '''
+        # Choose random winner from 24 division composition
+        results = []
+        for g in self.group.in_all_rounds():
+            if g.major_result:
+                results.append(g.origin_division)
+            else:
+                results.append(g.alternative_division)
+        # print(results)
+        random_division = random.choice(results)
+        self.group.final_division = random_division
 
 class VotingWaitingPage(WaitPage):
     after_all_players_arrive = process_voting

@@ -66,6 +66,7 @@ def process_voting(self):
         random_division = random.choice(results)
         self.group.final_division = random_division
 
+
 class VotingWaitingPage(WaitPage):
     after_all_players_arrive = process_voting
 
@@ -152,7 +153,9 @@ class FinalResultPage(Page):
         d_list = division.split(", ")
         payment = int(d_list[len(d_list) - rank])
         self.participant.payoff = payment
-        return dict(division=division, rank=rank, payment=payment, finalPayment=self.participant.payoff)
+        return dict(division=division, rank=rank, participantFee=self.session.config["participation_fee"],
+                    payment=self.participant.payoff,
+                    finalPayment=self.session.config["participation_fee"] + self.participant.payoff)
 
 
 page_sequence = [RegroupWaitPage, RegroupResultPage, IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage,

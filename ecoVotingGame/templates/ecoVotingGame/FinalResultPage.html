@@ -11,13 +11,19 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js" integrity="sha256-cHVO4dqZfamRhWD7s4iXyaXWVK10odD+qp4xidFzqTI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0-rc"></script>
     <p>
-       謝謝您參加我們的實驗。我們根據之前每一回合的投票結果，結算您帳戶最後累計的報酬，總共為{{finalPayment}}元台幣，作為您今天的報酬。
+        感謝您今天參與我們的實驗。根據電腦隨機挑選以及小組投票的結果，我們將用以下的報酬分配模式，決定您的實驗報酬，計為{{payment}}元。
     </p>
 <div id="chart_area">
     <div id="result_area">
         <canvas id="result" ></canvas>
     </div>
 </div>
+<p>
+    加上出席費{{ participantFee }}元，您今天的報酬總共為{{ finalPayment }}元。
+    現在請聆聽現場實驗助理的指示，辦理退場。
+    謝謝！
+
+</p>
 
     {% next_button %}
 <script>

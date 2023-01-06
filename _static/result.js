@@ -5,7 +5,7 @@ function setChart(ctx, rank, divisions, title_text) {
     indexLength = divisions.length
     origin_value = divisions[indexLength - rank]
     // Sorting division, and find correct_index
-    divisions.sort()
+    divisions.sort((a, b) => parseInt(a) - parseInt(b))
     correct_index = divisions.findIndex((num) => num == origin_value)
     // label_array = divisions.map((x) => x)
     label_array = [5, 4, 3, 2, 1]

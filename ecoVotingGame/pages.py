@@ -72,7 +72,6 @@ class VotingWaitingPage(WaitPage):
 
 
 class ResultPage(Page):
-    # timeout_seconds = 30
     # NEED MODIFICATION for group divide
     def vars_for_template(self):
         division = self.group.origin_division if self.group.major_result else self.group.alternative_division
@@ -90,7 +89,7 @@ class FinalResultWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
-    wait_for_all_groups = True
+    # wait_for_all_groups = True
 
 
 def set_shuffle_options(self):

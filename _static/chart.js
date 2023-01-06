@@ -6,7 +6,9 @@ function setChart(ctx, rank, divisions, title_text) {
     indexLength = divisions.length
     origin_value = divisions[indexLength - rank]
     // Sorting division, and find correct_index
-    divisions.sort()
+    console.log(divisions.toString())
+    divisions.sort((a, b) => parseInt(a) - parseInt(b))
+    // console.log(divisions.toString())
     correct_index = divisions.findIndex((num) => num == origin_value)
     // label_array = divisions.map((x) => x)
     label_array = [5,4,3,2,1]

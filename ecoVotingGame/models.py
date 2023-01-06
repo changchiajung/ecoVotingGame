@@ -30,6 +30,8 @@ class Subsession(BaseSubsession):
         new_dist = [[] for i in range(group_count)]
         for p in self.get_players():
             new_dist[(p.participant.vars["rank"] - 1) % group_count].append(p.id_in_subsession)
+            # p.participant.payoff =((p.participant.vars["rank"] - 1) % group_count + 1) / 10.0
+            p.participant.label = str((p.participant.vars["rank"] - 1) % group_count + 1)
             p.participant.vars["rank"] = (p.participant.vars["rank"] - 1) // group_count + 1
         print(new_dist)
         self.set_group_matrix(new_dist)

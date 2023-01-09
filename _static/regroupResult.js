@@ -29,7 +29,7 @@ function setChart(ctx, rank, divisions, title_text) {
                     max: max_answer,
                     title: {
                         display: true,
-                        text: "報酬",
+                        text: "得分",
                         font: {
                             size: 14
                         },

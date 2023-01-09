@@ -10,12 +10,19 @@ class VotingPage(Page):
     form_fields = ['choose']
     timer_text = '剩餘時間: '
 
+    # def get_timeout_seconds(player):
+    #     if player.round_number <= Constants.num_rounds / 3:
+    #         return 90
+    #     else:
+    #         return 60
+
     def vars_for_template(self):
         # rank = self.player.id_in_group
         rank = self.player.participant.vars["rank"]
         score = self.player.participant.vars["score"]
         return dict(origin_division=self.group.origin_division, alternative_division=self.group.alternative_division,
-                    rank=rank, score=score, round_number=self.subsession.round_number, round_number_progress=round(self.subsession.round_number/24*100, 2))
+                    rank=rank, score=score, round_number=self.subsession.round_number,
+                    round_number_progress=round(self.subsession.round_number / 24 * 100, 2))
 
 
 def process_voting(self):

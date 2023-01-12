@@ -5,16 +5,16 @@ import random
 
 
 class VotingPage(Page):
-    timeout_seconds = 60
+    # timeout_seconds = 60
     form_model = 'player'
     form_fields = ['choose']
     timer_text = '剩餘時間: '
 
-    # def get_timeout_seconds(player):
-    #     if player.round_number <= Constants.num_rounds / 3:
-    #         return 90
-    #     else:
-    #         return 60
+    def get_timeout_seconds(player):
+        if player.round_number <= Constants.num_rounds / 3:
+            return 90
+        else:
+            return 60
 
     def vars_for_template(self):
         # rank = self.player.id_in_group
@@ -114,6 +114,10 @@ def set_shuffle_options(self):
         g.alternative_division = alternative_division
 
 
+class IntroductionPage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
 class IntroductionWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == 1
@@ -164,5 +168,5 @@ class FinalResultPage(Page):
                     finalPayment=self.session.config["participation_fee"] + self.participant.payoff)
 
 
-page_sequence = [RegroupWaitPage, RegroupResultPage, IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage,
+page_sequence = [RegroupWaitPage, RegroupResultPage, IntroductionPage, IntroductionWaitPage, VotingPage, VotingWaitingPage, ResultPage,
                  ResultWaitPage, FinalResultWaitPage, FinalResultPage]

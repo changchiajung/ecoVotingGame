@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    投票說明
+{% endblock %}
+
+{% block content %}
+<p>
+    接下來會有24個回合的投票，每一回合會有兩種分配報酬的方法（左）與（右）
+</p>
+<p>
+    左為"與您排名 順序相同的酬勞分配"，右為"新的酬勞分配"，請大家投票決定，在兩者之間要用哪一種方法分 配組員們報酬。
+</p>
+<img src="{% static 'introduction.png' %}" alt="">
+<button class="otree-btn-next btn btn-primary" id="next_button">開始投票</button>
+
+
+<script src="{% static 'init.js' %}"></script>
+{% endblock %}

@@ -57,6 +57,7 @@ class Question(ExtraModel):
 
 class Player(BasePlayer):
     score = models.IntegerField(initial=0)
+    rank = models.IntegerField(initial=0)
     question_index = models.IntegerField(initial=1)
     # group_number = models.IntegerField()
 
@@ -125,6 +126,12 @@ def custom_export(players):
         answer_list = [""] * max_player
         for answer in answers:
             answer_list[answer.player.id_in_group - 1] = answer.answer
+        if q.sequence == 1:
+            part_data = [q.subsession.session.code, "", "受試者ID"]
+            part_data += ["" for index in range(1, max_player + 1)]
+            for player in Player.objects.filter(subsession=q.subsession):
+                part_data[player.id_in_group + 2] = player.participant.id
+            yield part_data
         yield [q.subsession.session.code, q.sequence, q.image_link] + answer_list
         if q.sequence == 30:
             score_data = [q.subsession.session.code, "", "受試者得分"]
@@ -132,4 +139,8 @@ def custom_export(players):
             for player in Player.objects.filter(subsession=q.subsession):
                 score_data[player.id_in_group+2] = player.score
             yield score_data
-
+            rank_data = [q.subsession.session.code, "", "受試者排名"]
+            rank_data += ["" for index in range(1, max_player + 1)]
+            for player in Player.objects.filter(subsession=q.subsession):
+                rank_data[player.id_in_group+2] = player.rank
+            yield rank_data

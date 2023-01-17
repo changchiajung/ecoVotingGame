@@ -56,7 +56,6 @@ def process_rank(self):
         current_player = self.group.get_player_by_id(k)
         current_player.participant.vars["score"] = current_player.score
         current_player.participant.vars["rank"] = current_rank
-        current_player.rank = current_rank
         print("id: {} , rank: {} ".format(current_player.id_in_group, current_rank))
         current_rank += 1
 

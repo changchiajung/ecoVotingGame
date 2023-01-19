@@ -50,6 +50,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     choose = models.StringField(widget=widgets.RadioSelect, choices=['左邊', '右邊'], label="選擇")
+    origin_option = models.IntegerField(blank=True)
+    alternative_option = models.IntegerField(blank=True)
 
 
 def custom_export(players):
@@ -65,11 +67,17 @@ def custom_export(players):
             player_list = [group.get_player_by_id(i).participant_id for i in range(1, 6)]
             yield [group.subsession.session.code, group.id_in_subsession, 0, "Record to look up participant number",
                    ""] + player_list + [""]
+        origin_list = [group.get_player_by_id(i).origin_option for i in range(1, 6)]
+        yield [group.subsession.session.code, group.id_in_subsession, group.round_number, "Payment of origin division",
+               ""] + origin_list + ["-"]
+        alternative_list = [group.get_player_by_id(i).alternative_option for i in range(1, 6)]
+        yield [group.subsession.session.code, group.id_in_subsession, group.round_number, "Payment of alternative division",
+               ""] + alternative_list + ["-"]
         player_list = [1 if group.get_player_by_id(i).choose == "左邊" else 2 for i in range(1, 6)]
-
         yield [group.subsession.session.code, group.id_in_subsession, group.round_number, group.origin_division,
                group.alternative_division] + player_list + [
                   group.origin_division if group.major_result else group.alternative_division]
+
         if group.round_number == Constants.num_rounds:
             player_list = [group.get_player_by_id(i).participant.payoff for i in range(1, 6)]
             yield [group.subsession.session.code, group.id_in_subsession, 0, "Payment and final division",

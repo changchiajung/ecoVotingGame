@@ -36,7 +36,7 @@ function setChart(ctx, rank, divisions, title_text) {
                     max: 400,
                     title: {
                         display: true,
-                        text: "報酬",
+                        text: "報酬（元）",
                         font: {
                             size: 14
                         }

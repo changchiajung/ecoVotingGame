@@ -82,10 +82,14 @@ def parse_question_from_file(self):
 
 
 class IntroductionWaitPage(WaitPage):
+    title_text = "請耐心稍候其他受試者"
+    body_text = "請靜待其他玩家的決定，完成後將會自動跳轉。"
     after_all_players_arrive = parse_question_from_file
 
 
 class WaitForRankProcess(WaitPage):
+    title_text = "請耐心稍候其他受試者"
+    body_text = "請靜待其他玩家的決定，完成後將會自動跳轉。"
     after_all_players_arrive = process_rank
 
 

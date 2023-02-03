@@ -77,6 +77,8 @@ def process_voting(self):
 
 
 class VotingWaitingPage(WaitPage):
+    title_text = "請耐心稍候其他受試者"
+    body_text = "請靜待其他玩家的決定，完成後將會自動跳轉。"
     after_all_players_arrive = process_voting
 
 
@@ -90,11 +92,15 @@ class ResultPage(Page):
 
 
 class ResultWaitPage(WaitPage):
+    title_text = "請耐心稍候其他受試者"
+    body_text = "請靜待其他玩家的決定，完成後將會自動跳轉。"
     def is_displayed(self):
         return self.round_number != Constants.num_rounds
 
 
 class FinalResultWaitPage(WaitPage):
+    title_text = "請耐心稍候其他受試者"
+    body_text = "請靜待其他玩家的決定，完成後將會自動跳轉。"
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
@@ -121,6 +127,8 @@ class IntroductionPage(Page):
         return self.round_number == 1
 
 class IntroductionWaitPage(WaitPage):
+    title_text = "請耐心稍候其他受試者"
+    body_text = "請靜待其他玩家的決定，完成後將會自動跳轉。"
     def is_displayed(self):
         return self.round_number == 1
 
@@ -128,6 +136,8 @@ class IntroductionWaitPage(WaitPage):
 
 
 class RegroupWaitPage(WaitPage):
+    title_text = "請耐心稍候其他受試者"
+    body_text = "請靜待其他玩家的決定，完成後將會自動跳轉。"
     def is_displayed(self):
         return self.round_number == 1
 

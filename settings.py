@@ -18,6 +18,12 @@ SESSION_CONFIGS = [
         use_browser_bots=True,
         participation_fee=150
     ),
+    dict(
+        name="payment",
+        app_sequence=['payment'],
+        num_demo_participants=1,
+    )
+
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

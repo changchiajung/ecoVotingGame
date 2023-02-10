@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Result
+{% endblock %}
+
+{% block content %}
+
+    Your payment is {{ payment }}
+<script>
+    $(document).ready(function () {
+        $(".debug-info").remove()
+    })
+</script>
+{% endblock %}
+
+

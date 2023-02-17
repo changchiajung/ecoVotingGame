@@ -98,4 +98,7 @@ class Results(Page):
         return dict(score=self.participant.vars["score"], rank=self.participant.vars["rank"])
 
 
-page_sequence = [Introduction, IntroductionWaitPage, GeneralTest, WaitForRankProcess, Results]
+class FirstQuestion(Page):
+    pass
+
+page_sequence = [Introduction, FirstQuestion,IntroductionWaitPage, GeneralTest, WaitForRankProcess, Results]

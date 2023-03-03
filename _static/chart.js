@@ -85,5 +85,5 @@ function setChart(ctx, rank, divisions, title_text) {
     });
 }
 
-var leftChart = setChart(leftctx, rank, origin_division, "左邊")
-var rightChart = setChart(rightctx, rank, alternative_division, "右邊")
+var leftChart = setChart(leftctx, rank, origin_division, "原方案")
+var rightChart = setChart(rightctx, rank, alternative_division, "新方案")

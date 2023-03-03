@@ -16,7 +16,7 @@ class GeneralTest(Page):
     def vars_for_template(self):
         question = Question.objects.filter(subsession=self.subsession,
                                            sequence=self.player.question_index)
-                                           # group_number=self.player.group_number)
+        # group_number=self.player.group_number)
         if question.count() > 0:
             image_link = Constants.image_base_link + question[0].image_link
             # print(image_link)
@@ -98,7 +98,8 @@ class Results(Page):
         return dict(score=self.participant.vars["score"], rank=self.participant.vars["rank"])
 
 
-class FirstQuestion(Page):
+class GeneralTestIntroduction(Page):
     pass
 
-page_sequence = [Introduction, FirstQuestion,IntroductionWaitPage, GeneralTest, WaitForRankProcess, Results]
+
+page_sequence = [Introduction, IntroductionWaitPage, GeneralTestIntroduction, GeneralTest, WaitForRankProcess]

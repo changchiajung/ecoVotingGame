@@ -81,4 +81,4 @@ function setChart(ctx, rank, divisions, title_text) {
     });
 }
 
-var chart = setChart(ctx, rank, division, "divisions")
+var chart = setChart(ctx, rank, division, "組內得分")

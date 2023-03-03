@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p>
+    做完以上理解測驗，應該有幫助你更了解我們的實驗，接下來將正式進行24個回合的 投票。
+</p>
+<p>
+    若您準備好，即可點擊「開始投票 」進行投票。
+</p>
+<button class="otree-btn-next btn btn-primary" id="next_button">開始投票</button>
+
+
+<script src="{% static 'init.js' %}"></script>
+{% endblock %}

@@ -10,7 +10,7 @@
         height: 65vh;
     }
 </style>
-<h5 id="intro_title">閱讀完上述實驗說明後，接下來有幾個問答題幫助你可以更理解實驗內容，此問答不會影響成績排名，請安心作答。</h5>
+<h5 id="intro_title">閱讀完上述投票說明後，接下來有幾個問答題幫助你可以更理解實驗內容，此問答不會影響成績排名，請安心作答。</h5>
 <br>
 <h5 id="image_desc_1">請參考以下兩種分配小組成員實驗報酬的方式，淺紅色標記你的位置，淺藍色是其他組員：</h5>
 <img src="/static/understanding/understand_1.png" style="width: 90%;height: auto" alt="First Image" id="image_1">
@@ -25,13 +25,13 @@
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="choose" id="left_button" value="left">
     <label class="form-check-label" for="left_button" id="left_button_label">
-        左邊
+        原方案
     </label>
 </div>
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="choose" id="right_button" value="right">
     <label class="form-check-label" for="right_button" id="right_button_label">
-        右邊
+        新方案
     </label>
 </div>
 <br>
@@ -63,7 +63,7 @@
         ["假設你的小組經過投票後，選擇方案（A）與（B）的比例為2：3", "接著在下一輪投票中，選擇方案（C）與（D）的比例為3：2", "請回答以下問題（是非題）："],
         ["假設你的小組經過投票後，選擇方案（A）與（B）的比例為2：3", "接著在下一輪投票中，選擇方案（C）與（D）的比例為3：2", "請回答以下問題（是非題）："]
     ]
-    const optionsList = [["左邊", "右邊"], ["左邊", "右邊"], ["左邊", "右邊"], ["左邊", "右邊"], ["是", "否"], ["是", "否"]]
+    const optionsList = [["原方案", "新方案"], ["原方案", "新方案"], ["原方案", "新方案"], ["原方案", "新方案"], ["是", "否"], ["是", "否"]]
     const answersList = ["right", "left", "left", "left", "left", "left"]
     const explanationList = ["說明: 在左邊你的報酬分配為$30，在右邊你的報酬分配為$100，故右邊你可以得到較高的報酬。",
         "說明: 在左邊的報酬範疇由最低5到最高40，在右邊的報酬範疇由最低100到最高300，故左邊分配報酬的方式比較平均。",
